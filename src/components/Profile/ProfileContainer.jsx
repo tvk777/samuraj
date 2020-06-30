@@ -1,12 +1,11 @@
-import React from 'react';
 import Profile from './Profile';
 import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
 } from './../../redux/profileReducer';
-import StoreContext from '../../StoreContext';
+import { connect } from 'react-redux';
 
-const ProfileContainer = () => {
+/* const _ProfileContainer = () => {
   return (
     <StoreContext.Consumer>
       {(store) => {
@@ -28,6 +27,21 @@ const ProfileContainer = () => {
       }}
     </StoreContext.Consumer>
   );
-};
+}; */
+
+const mapStateToProps = (state) => {
+  return {
+    state: state.profilePage
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: () => { dispatch(addPostActionCreator()); },
+    changeNewPostText: (text) => {
+      dispatch(updateNewPostTextActionCreator(text));
+    }  
+  }
+}
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 export default ProfileContainer;

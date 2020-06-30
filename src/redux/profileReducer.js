@@ -10,30 +10,34 @@ const initialState = {
     newPostText: 'react redux learning'
 }
 
-const profileReducer = (state=initialState, action) => {
-    switch(action.type){
+const profileReducer = (state = initialState, action) => {
+    let stateCopy = { ...state };
+    switch (action.type) {
         case ADD_POST:
             let newPost = {
                 id: 4,
                 message: state.newPostText,
                 likecount: 0
             };
-           state.posts.push(newPost);
-           state.newPostText = '';
-           return state;
-           case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.text;
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts.push(newPost);
+            stateCopy.newPostText = '';
+            return stateCopy;
+        case UPDATE_NEW_POST_TEXT:
+            return  {
+                ...state,
+                newPostText:action.text
+            }
+        default:
             return state;
-            default:
-                return state;        
     }
 }
-    
+
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({ 
-  type:UPDATE_NEW_POST_TEXT,
-  text:text
+export const updateNewPostTextActionCreator = (text) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    text: text
 });
 
 
