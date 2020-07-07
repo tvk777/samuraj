@@ -5,30 +5,6 @@ import {
 } from './../../redux/profileReducer';
 import { connect } from 'react-redux';
 
-/* const _ProfileContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        const state = store.getState().profilePage;
-        const addPost = () => {
-          store.dispatch(addPostActionCreator());
-        };
-
-        const changeNewPostText = (text) => {
-          store.dispatch(updateNewPostTextActionCreator(text));
-        };
-        return (
-          <Profile
-            state={state}
-            addPost={addPost}
-            changeNewPostText={changeNewPostText}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
-}; */
-
 const mapStateToProps = (state) => {
   return {
     state: state.profilePage
