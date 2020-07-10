@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const initialState = {
     posts: [
@@ -7,7 +8,8 @@ const initialState = {
         { id: 2, message: 'My first comment', likecount: 8 },
         { id: 3, message: 'My second comment', likecount: 9 },
     ],
-    newPostText: 'react redux learning'
+    newPostText: 'react redux learning',
+    profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -28,17 +30,23 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText:action.text
             }
-        default:
+            case SET_USER_PROFILE:
+                return  {
+                    ...state,
+                    profile:action.profile
+                }
+    default:
             return state;
     }
 }
 
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({
+export const addPost = () => ({ type: ADD_POST });
+export const updateNewPostText = (text) => ({
     type: UPDATE_NEW_POST_TEXT,
     text: text
 });
+export const setUserProfile = (profile) =>({ type:SET_USER_PROFILE, profile});
 
 
 export default profileReducer;
