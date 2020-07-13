@@ -18,7 +18,6 @@ class ProfileContainer extends Component {
   }
 render()
   {
-    console.log(this.props.match);
     return <Profile {...this.props} profile={this.props.profile} />
   }
 
