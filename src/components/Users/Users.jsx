@@ -3,7 +3,6 @@ import userPhoto from '../../assets/images/user.jpg';
 import classes from './Users.module.css';
 import {Preloader} from '../common/Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
-import {setFollow, setUnFollow} from '../../api/api';
 
 const Users = (props) => {
   return (
@@ -38,24 +37,14 @@ const Users = (props) => {
               {u.followed ? (
                 <button
                   disabled={props.isFollowingProgress.some(id => id === u.id)}
-                  onClick={() => {
-                    props.setIsFollowingProgress(true, u.id);
-                    setUnFollow(u.id);
-                    props.unfollow(u.id);
-                    props.setIsFollowingProgress(false, u.id);
-                  }}
+                  onClick={() => {props.unfollow(u.id)}}
                 >
                   Unollow
                 </button>
               ) : (
                 <button
                   disabled={props.isFollowingProgress.some(id => id === u.id)}
-                  onClick={() => {
-                    props.setIsFollowingProgress(true, u.id);
-                    setFollow(u.id);
-                    props.follow(u.id);
-                    props.setIsFollowingProgress(false, u.id);
-                  }}
+                  onClick={() => {props.follow(u.id)}}
                 >
                   Follow
                 </button>
