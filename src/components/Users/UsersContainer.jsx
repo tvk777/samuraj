@@ -11,8 +11,7 @@ class UsersContainer extends Component {
   }
 
   onPageChanged = page => {
-    this.props.setCurrentPage(page);
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);    
+    this.props.getUsers(page, this.props.pageSize);    
   }
 
   render() {
