@@ -6,7 +6,7 @@ import {
   getUserProfile,
 } from './../../redux/profileReducer';
 import {connect} from 'react-redux';
-import {withRouter, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 
