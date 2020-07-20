@@ -3,6 +3,7 @@ import { follow, unfollow, setCurrentPage, setTotalPageCount, setTotalUsersCount
 import { connect } from 'react-redux';
 
 import React, {Component} from 'react';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends Component {
@@ -50,9 +51,9 @@ const mapStateToProps = (state) => {
     isFollowingProgress: state.usersPage.isFollowingProgress,    
   }
 }
-export default connect(mapStateToProps, 
+export default withAuthRedirect(connect(mapStateToProps, 
   { follow, unfollow, setCurrentPage, setTotalPageCount, setTotalUsersCount, getUsers}
-  )(UsersContainer);
+  )(UsersContainer));
 
 
 /* const mapDispatchToProps = (dispatch) => {

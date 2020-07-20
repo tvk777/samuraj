@@ -8,6 +8,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
 
 import { BrowserRouter, Route } from 'react-router-dom'
 
@@ -17,13 +18,14 @@ const App = (props) => {
       <div className="app-wrapper">
         <HeaderContainer />
         <Navbar />
-        <div className="app-wrapper-content">          
+        <div className="app-wrapper-content">
           <Route path='/dialogs' render={() => <DialogsContainer />} />
           <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
           <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/music' component={Music} />
           <Route path='/news' component={News} />
           <Route path='/settings' component={Settings} />
+          <Route path='/login' component={Login} />
         </div>
       </div>
     </BrowserRouter>
