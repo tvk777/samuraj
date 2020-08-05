@@ -9,12 +9,14 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer'
 import Login from './components/Login/Login'
-
 import { BrowserRouter, Route } from 'react-router-dom'
+
+//import {Counter} from './experiments/counter'
 
 const App = (props) => {
   return (
     <BrowserRouter>
+    {/* <Counter /> */}
       <div className="app-wrapper">
         <HeaderContainer />
         <Navbar />
