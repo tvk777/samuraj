@@ -31,7 +31,6 @@ class ProfileStatus extends Component {
     });
   };
   render() {
-    console.log('render');
     return (
       <div>
         {!this.state.editMode && (

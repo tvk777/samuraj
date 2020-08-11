@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Profile from './Profile';
 import {
   addPost,
-  updateNewPostText,
   getUserProfile,
   getUserStatus,
   updateStatus
@@ -49,7 +48,6 @@ export default connect(mapStateToProps, {
 export default compose(
   connect(mapStateToProps, {
     addPost,
-    updateNewPostText,
     getUserProfile,
     getUserStatus,
     updateStatus,

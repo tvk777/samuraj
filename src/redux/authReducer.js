@@ -1,6 +1,7 @@
 import {getAuth} from '../api/api';
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
+//const LOGIN_USER = 'LOGIN_USER';
 const initialState = {
     userId: null,
     email: null,
@@ -17,6 +18,12 @@ const authReducer = (state = initialState, action) => {
                 ...action.data,
                 isAuth: true
             };
+            /* case LOGIN_USER:
+                return {
+                    ...state,
+                    ...action.data,
+                    isAuth: true
+                };  */ 
         default:
             return state;
     }
@@ -34,5 +41,8 @@ export const getAuthUserData = () => {
   
     }
 }
+
+//export const loginUser = (email, login) => ({type:LOGIN_USER, data: {email, login}});
+
 
 export default authReducer;
