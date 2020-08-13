@@ -1,28 +1,34 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
+import {Input} from '../common/formFields/Input';
+import {required, minLength, email} from '../../utils/validators/validators';
+
+const minLength3 = minLength(3);
+const minLength6 = minLength(6);
 
 const LoginForm = (props) => {
   const {handleSubmit} = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <Field name="login" component="input" type="text" placeholder="Login" />
+        <Field name="login" component={Input} type="text" placeholder="Login" validate={[required, minLength3]} />
       </div>
       <div>
-        <Field name="email" component="input" type="text" placeholder="Email" />
+        <Field name="email" component={Input} type="text" placeholder="Email"  validate={[required, email]} />
       </div>
 
       <div>
         <Field
           name="password"
-          component="input"
+          component={Input}
           type="text"
           placeholder="Password"
+          validate={[required, minLength6]} 
         />
       </div>
       <div>
-        <Field name="rememberMe" component="input" type="checkbox" />
+        <Field name="rememberMe" component={Input} type="checkbox" />
         Remember me
       </div>
       <div>
@@ -38,7 +44,7 @@ const Login = () => {
   const onSubmitHandle = (values) => {
     console.log(values);
   };
-  console.log(0);
+
   return (
     <div>
       <h1>Login</h1>
