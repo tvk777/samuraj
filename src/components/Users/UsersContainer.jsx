@@ -1,19 +1,20 @@
 import Users from './Users';
-import { follow, unfollow, setCurrentPage, setTotalPageCount, setTotalUsersCount, getUsers } from './../../redux/usersReducer';
+import { follow, unfollow, setCurrentPage, setTotalPageCount, setTotalUsersCount, getCurrentUsers } from './../../redux/usersReducer';
 import { connect } from 'react-redux';
 
 import React, {Component} from 'react';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
+import {getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getIsFollowingProgress} from './../../redux/users-selectors';
 
 
 class UsersContainer extends Component {
   componentDidMount(){
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    this.props.getCurrentUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = page => {
-    this.props.getUsers(page, this.props.pageSize);    
+    this.props.getCurrentUsers(page, this.props.pageSize);    
   }
 
   render() {
@@ -44,18 +45,17 @@ class UsersContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    isFollowingProgress: state.usersPage.isFollowingProgress,    
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    isFollowingProgress: getIsFollowingProgress(state),    
   }
 }
 
 export default compose(
-  withAuthRedirect,
-  connect(mapStateToProps, {follow, unfollow, setCurrentPage, setTotalPageCount, setTotalUsersCount, getUsers}) 
+  connect(mapStateToProps, {follow, unfollow, setCurrentPage, setTotalPageCount, setTotalUsersCount, getCurrentUsers}) 
 )(UsersContainer);
 
 /* export default withAuthRedirect(connect(mapStateToProps, 

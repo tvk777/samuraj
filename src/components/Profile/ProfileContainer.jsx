@@ -9,15 +9,20 @@ import {
 import {getAuthUserData} from '../../redux/authReducer';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-//import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    const userId = this.props.match.params.userId
-      ? this.props.match.params.userId
-      : this.props.authUserId || 9272;
+    let userId = this.props.match.params.userId;
+    if(!userId){
+      userId = this.props.authUserId;
+      /* if(!userId) {
+        this.props.history.push("/login");
+      } */
+    }
+
     this.props.getUserProfile(userId);
     this.props.getUserStatus(userId);
   }
@@ -31,14 +36,13 @@ const mapStateToProps = (state) => {
     state: state.profilePage,
     profile: state.profilePage.profile,
     authUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
   };
 };
 
 
 /* const AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
 const WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
-
 export default connect(mapStateToProps, {
   addPost,
   updateNewPostText,
@@ -54,5 +58,5 @@ export default compose(
     getAuthUserData
   }),
   withRouter,
-  //withAuthRedirect 
+  withAuthRedirect 
 )(ProfileContainer)

@@ -1,8 +1,11 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom'
 import {Input} from '../common/formFields/Input';
 import {required, minLength, email} from '../../utils/validators/validators';
+import {login} from '../../redux/authReducer';
+import styles from '../common/formFields/formFields.module.css';
 
 const minLength3 = minLength(3);
 const minLength6 = minLength(6);
@@ -22,7 +25,7 @@ const LoginForm = (props) => {
         <Field
           name="password"
           component={Input}
-          type="text"
+          type="password"
           placeholder="Password"
           validate={[required, minLength6]} 
         />
@@ -31,6 +34,7 @@ const LoginForm = (props) => {
         <Field name="rememberMe" component={Input} type="checkbox" />
         Remember me
       </div>
+      {props.error && <div className={styles.formSummaryError}>{props.error}</div>}
       <div>
         <button>Login</button>
       </div>
@@ -40,10 +44,14 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const Login = () => {
+const Login = (props) => {
   const onSubmitHandle = (values) => {
-    console.log(values);
+    props.login(values.email, values.password, values.rememberMe)
   };
+
+  if(props.isAuth) {
+    return <Redirect to="/profile" />
+  }
 
   return (
     <div>
@@ -53,12 +61,10 @@ const Login = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    login: state.auth.login,
-    isAuth: state.auth.isAuth,
-  };
-};
-export default connect(mapStateToProps, {})(Login);
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login);
 
 

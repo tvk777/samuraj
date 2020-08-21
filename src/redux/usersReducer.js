@@ -70,7 +70,7 @@ export const setTotalPageCount = count => ({ type: SET_TOTAL_USERS_COUNT, count 
 export const setTotalUsersCount = count => ({ type: SET_TOTAL_USERS_COUNT, count });
 export const setIsFetching = isFetching => ({ type: SET_IS_FETCHING, isFetching });
 export const setIsFollowingProgress = (isFollowingProgress, userId) => ({ type: SET_IS_FOLLOWING_PROGRESS, isFollowingProgress, userId });
-export const getUsers = (currentPage, pageSize) => {
+export const getCurrentUsers = (currentPage, pageSize) => {
     return (dispatch) => {
     dispatch(setCurrentPage(currentPage));    
     dispatch(setIsFetching(true));
