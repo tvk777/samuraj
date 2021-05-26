@@ -17,17 +17,11 @@ class UsersContainer extends Component {
     this.props.getCurrentUsers(page, this.props.pageSize);    
   }
 
-  render() {
-    const pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
-    let pages = [];
-    for(let i=1; i<=pagesCount; i++){
-      pages.push(i);
-    }
-
-  
+  render() {  
     return (
       <Users 
-      pages={pages}
+      totalUsersCount={this.props.totalUsersCount}
+      pageSize={this.props.pageSize}
       currentPage={this.props.currentPage}
       onPageChanged={this.onPageChanged}
       users={this.props.users}
